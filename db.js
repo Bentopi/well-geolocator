@@ -33,6 +33,9 @@ const connect = ()=> {
         seed();
       }
     }
+    else {
+      console.log(err);
+    }
   });
 };
 

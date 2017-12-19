@@ -13,6 +13,7 @@
     "pg": "^7.4.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-leaflet": "^1.7.8",
     "swig": "^1.4.2"
   },
   "scripts": {
@@ -21,6 +22,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "start:dev": "SEED=TRUE DATABASE_URL=postgres://localhost/qritest-dev  nodemon server.js"
-
   }
 }

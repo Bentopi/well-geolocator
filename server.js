@@ -3,6 +3,11 @@ const express= require('express');
 const compression = require('compression');
 const morgan = require('morgan');
 const path = require('path');
+const pg = require('pg');
+const db = require('./db.js')
+
+
+db.connect();
 
 const normalizePort = port => parseInt(port, 10);
 const PORT = normalizePort(process.env.PORT || 5000)
@@ -35,5 +40,5 @@ const server = createServer(app)
 server.listen(PORT, err => {
   if (err) throw err;
 
-  console.log('Server Started')
+  console.log(`Server started on port ${PORT}`)
 });

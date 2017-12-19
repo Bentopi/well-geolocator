@@ -9,13 +9,18 @@
     "compression": "^1.7.1",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
+    "nodemon": "^1.13.3",
+    "pg": "^7.4.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "swig": "^1.4.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:dev": "SEED=TRUE DATABASE_URL=postgres://localhost/qritest-dev  nodemon server.js"
+
   }
 }

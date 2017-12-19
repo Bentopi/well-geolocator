@@ -21,7 +21,6 @@ const seed = ()=> {
     if(err){
       console.log(err);
     }
-    else console.log('Data import successful')
   });
 }
 
@@ -31,6 +30,7 @@ const connect = ()=> {
       console.log('Database connection successful')
       if(process.env.SEED){
         seed();
+        console.log('Data import successful')
       }
     }
     else {
@@ -39,4 +39,26 @@ const connect = ()=> {
   });
 };
 
-module.exports = { connect };
+const getWell = (id, cb)=> {
+  client.query('SELECT * FROM WELLS WHERE ID = $1', [ id ], (err, result)=> {
+    if(err){
+      return cb(err);
+    }
+    if(result.rows.length === 0) {
+      return cb(new Error('No record found for that id'));
+    }
+    cb(null, result.rows[0]);
+  });
+};
+
+const getWells = (cb)=> {
+  client.query('SELECT * FROM WELLS', (err, result)=> {
+    if(err){
+      return cb(err);
+    }
+    cb(null, result.rows);
+  });
+}
+
+
+module.exports = { connect, getWells, getWell };

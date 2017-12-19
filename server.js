@@ -3,16 +3,37 @@ const express= require('express');
 const compression = require('compression');
 const morgan = require('morgan');
 const path = require('path');
-const pg = require('pg');
+
 const db = require('./db.js')
-
-
 db.connect();
 
 const normalizePort = port => parseInt(port, 10);
 const PORT = normalizePort(process.env.PORT || 5000)
 
 const app = express()
+
+app.get('/wells', (req, res, next) => {
+  db.getWells((err, wells)=> {
+    if(err){
+      return next(err);
+    }
+    res.send(wells);
+  });
+});
+
+app.get('/:id', (req, res, next)=> {
+  db.getWell(req.params.id*1, (err, wells )=> {
+    if(err){
+      return next(err);
+    }
+    res.send(wells);
+  });
+});
+
+app.use((error, req, res, next) => {
+  res.send(error.message);
+});
+
 
 // get the environment if it isn't production
 const dev = app.get('env') !== 'production'
